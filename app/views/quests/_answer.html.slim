@@ -1,0 +1,8 @@
+.mb-3
+table.table.table-hover
+  tbody
+      tr
+        td= link_to answer.title
+        td= auto_link(simple_format(h(answer.description),{}, sanitize:false, wrapper_tag: "div"))
+        
+        

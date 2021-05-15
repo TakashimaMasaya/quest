@@ -1,0 +1,48 @@
+h1 質問一覧
+
+= search_form_for @q, class: 'mb-5' do |f|
+  .form-group.row
+    = f.label :title_cont, '名称', class: 'com-sm-2 col-form-label'
+    .col-sm-10
+      = f.search_field :title_cont, class: 'form-control'
+  .form-group
+    = f.submit class: 'btn btn-outline-primary'
+
+= link_to '新規登録', new_quest_path, class: 'btn btn-primary'
+
+.btn.btn-primary.answered_btn
+  | 未解決
+.btn.btn-primary.unanswered_btn
+  | 解決済
+.btn.btn-primary.all_btn
+  | 全て表示
+
+.mb-3
+  = paginate @quests
+  = page_entries_info @quests
+
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= "アバター"
+      th= Quest.human_attribute_name(:title)
+      th
+
+  tbody
+  - @quest_unanswered.each do |quest|
+      tr.unanswered 
+        td= image_tag quest.user.avatar,width:"50px" if quest.user.avatar.attached?
+        td= link_to quest.title, quest
+        td
+          = link_to '編集', edit_quest_path(quest), class: 'btn btn-primary mr-3'
+          = button_to '削除', quest, method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
+  
+  tbody
+  - @quest_answered.each do |quest|
+      tr.answered 
+        td= image_tag quest.user.avatar,width:"50px" if quest.user.avatar.attached?
+        td= link_to quest.title, quest
+        td
+          = link_to '編集', edit_quest_path(quest), class: 'btn btn-primary mr-3'
+          = button_to '削除', quest, method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
+

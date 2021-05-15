@@ -1,0 +1,13 @@
+- if quest.errors.present?
+  ul#error_explanation
+    - quest.errors.full_message.each do |message|
+      li= message
+
+= form_with model: quest, local: true do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control', id: 'quest_name'
+  .form-group
+    = f.label :description
+    = f.text_area :description, rows:5, class: 'form-control', id: 'quest_description'
+  = f.submit nil, class: 'btn btn-primary'

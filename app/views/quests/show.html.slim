@@ -1,0 +1,32 @@
+h1 質問内容
+
+.nav.justify-content-end
+  =link_to '一覧', quests_path, class: 'nav-link'
+  = link_to '編集', edit_quest_path, class: 'btn btn-primary mr-3'
+  = button_to '削除', @quest, method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
+table.table.table-hover
+  tbody
+    tr
+      th= Quest.human_attribute_name(:title)
+      td= @quest.title
+    tr
+      th= Quest.human_attribute_name(:description)
+      td= auto_link(simple_format(h(@quest.description),{}, sanitize:false, wrapper_tag: "div"))
+
+= form_with model:[@quest, @answer], local: true do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control', id: 'answer_name'
+  .form-group
+    = f.label :description
+    = f.text_area :description, rows:5, class: 'form-control', id: 'answer_description'
+  = f.submit '回答する' , class: 'btn btn-primary'
+
+= link_to '解決済み', quest_quests_answered_path(@quest.id), class: 'btn btn-primary'
+= link_to '未解決', quest_quests_unanswered_path(@quest.id), class: 'btn btn-primary'
+
+= render partial: 'quests/answer', collection: @answers, as: 'answer'
+
+
+
+

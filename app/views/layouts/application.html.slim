@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title
+      | Question
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    / = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+  .app-title.navbar-expand-md.navbar-light.bg-light
+    .navbar-brand Question
+
+    ul.navbar-nav.ml-auto
+      - if current_user
+        li.nav-item= link_to '質問一覧', quests_path, class: 'nav-link'
+        - if current_user.admin?
+          li.nav-item= link_to 'ユーザー一覧', admin_users_path, class: 'nav-link'
+        li.nav-item= button_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
+        -if current_user.avatar.attached?
+          li.nav-item= image_tag current_user.avatar,width: "30px", class:"avatar"
+      - else
+        li.nav-item= link_to 'ログイン', login_path, class: 'nav-link' 
+        li.nav-item= link_to '新規登録', new_admin_user_path, class: 'nav-link' 
+
+  .container
+    - if flash.notice.present?
+      .alert.alert-success= flash.notice
+    = yield
+
+    

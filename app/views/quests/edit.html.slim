@@ -1,0 +1,8 @@
+h1 質問編集画面
+
+.nav.justify-content-end
+  = link_to '一覧', quests_path, class: 'nav-link'
+
+= render partial: 'form', locals: { quest: @quest }
+
+
