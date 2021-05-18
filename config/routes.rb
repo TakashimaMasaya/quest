@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   root to: 'quests#index'
   resources :quests do 
     resources :answers
-    get 'quests/answered' => 'quests#answered'
-    get 'quests/unanswered' => 'quests#unanswered'
+    member do
+      get 'solved' => 'quests#solved'
+      get 'unsolved' => 'quests#unsolved'
+    end
   end 
 
   

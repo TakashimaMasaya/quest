@@ -3,19 +3,19 @@ class QuestsController < ApplicationController
    @quest_all = Quest.all
    @q = @quest_all.ransack(params[:q])
    @quests = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10) 
-   @quest_answered = @quests.where( solved: true)
-   @quest_unanswered = @quests.where( solved: false)
+   @quest_solved = @quests.where( solved: true)
+   @quest_unsolved = @quests.where( solved: false)
   end
 
-  def answered
-    @quest = Quest.find(params[:quest_id])
+  def solved
+    @quest = Quest.find(params[:id])
     @quest.solved = "true"
     @quest.save
     redirect_to quests_url, notice: "解決済にしました"
   end
 
-  def unanswered
-    @quest = Quest.find(params[:quest_id])
+  def unsolved
+    @quest = Quest.find(params[:id])
     @quest.solved = "false"
     @quest.save
     redirect_to quests_url, notice: "未解決にしました"
