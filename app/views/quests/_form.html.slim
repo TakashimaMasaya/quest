@@ -1,6 +1,6 @@
 - if quest.errors.present?
   ul#error_explanation
-    - quest.errors.full_message.each do |message|
+    - quest.errors.full_messages.each do |message|
       li= message
 
 = form_with model: quest, local: true do |f|

@@ -43,7 +43,7 @@ class QuestsController < ApplicationController
   end
 
   def edit
-    @quest = Quest.find(params[:id])
+    @quest = current_user.quests.find(params[:id])
   end
 
   def update

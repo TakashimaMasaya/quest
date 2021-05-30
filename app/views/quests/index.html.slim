@@ -33,15 +33,17 @@ table.table.table-hover
       tr.unanswered 
         td= image_tag quest.user.avatar,width:"50px" if quest.user.avatar.attached?
         td= link_to quest.title, quest
-        td
-          = link_to '編集', edit_quest_path(quest), class: 'btn btn-primary mr-3'
-          = button_to '削除', quest, method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
+        - if current_user.id == quest.user_id
+          td
+            = link_to '編集', edit_quest_path(quest), class: 'btn btn-primary mr-3'
+            = button_to '削除', quest, method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
   tbody
   - @quest_solved.each do |quest|
       tr.answered 
         td= image_tag quest.user.avatar,width:"50px" if quest.user.avatar.attached?
         td= link_to quest.title, quest
-        td
-          = link_to '編集', edit_quest_path(quest), class: 'btn btn-primary mr-3'
-          = button_to '削除', quest, method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
+        - if current_user.id == quest.user_id
+          td
+            = link_to '編集', edit_quest_path(quest), class: 'btn btn-primary mr-3'
+            = button_to '削除', quest, method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
 
