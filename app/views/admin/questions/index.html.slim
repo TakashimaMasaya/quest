@@ -1,0 +1,28 @@
+<!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">id</th>
+                      <th>title</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  - @quests.each do |quest|
+                      tr
+                        td= quest.id
+                        td= quest.title
+                        td
+                          = link_to '削除', '#' , method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
+                </table>
+            
+
+          
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
