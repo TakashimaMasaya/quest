@@ -28,8 +28,10 @@ table.table.table-hover
       th= "アバター"
       th= Quest.human_attribute_name(:title)
       th
-
-  tbody
+  thead.thead-default
+    tr
+      th= "未解決"
+  tbody 
   - @quest_unsolved.each do |quest|
       tr.unanswered 
         td= image_tag quest.user.avatar,width:"50px" if quest.user.avatar.attached?
@@ -38,7 +40,10 @@ table.table.table-hover
           td
             = link_to '編集', edit_quest_path(quest), class: 'btn btn-primary mr-3'
             = button_to '削除', quest, method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
-  tbody
+  thead.thead-default
+    tr
+      th= "解決済"
+  tbody  
   - @quest_solved.each do |quest|
       tr.answered 
         td= image_tag quest.user.avatar,width:"50px" if quest.user.avatar.attached?

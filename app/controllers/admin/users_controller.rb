@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  layout 'admin/layouts/application'
   skip_before_action :login_required
   def index
     @users = User.all
