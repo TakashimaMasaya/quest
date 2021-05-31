@@ -1,6 +1,8 @@
 class Admin::UsersController < ApplicationController
   layout 'admin/layouts/application'
-  skip_before_action :login_required
+  before_action :require_admin
+  skip_before_action :login_required, only: [:new, :create]
+  skip_before_action :require_admin, only: [:new, :create]
   def index
     @users = User.all
   end
@@ -9,23 +11,12 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def new
-    @user = User.new
-  end
+  
 
   def edit
     @user = User.find(params[:id])
   end
 
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      redirect_to login_path, notice:"ユーザー「#{@user.name}」を登録しました。"
-    else
-      render :new
-    end
-  end
 
   def update
     @user = User.find(params[:id])
@@ -45,9 +36,27 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path, notice:"ユーザー「#{@user.name}」を削除しました。"
   end
 
+  def new
+    @user = User.new
+  end
+
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to login_path, notice:"ユーザー「#{@user.name}」を登録しました。"
+    else
+      render :new
+    end
+  end
+
   private
 
   def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
+  end
+
+  def require_admin
+    redirect_to root_path unless current_user.admin?
   end
 end
