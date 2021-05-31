@@ -1,8 +1,7 @@
 class Admin::UsersController < ApplicationController
   layout 'admin/layouts/application'
-  before_action :require_admin
+  before_action :require_admin, except: [:new, :create]
   skip_before_action :login_required, only: [:new, :create]
-  skip_before_action :require_admin, only: [:new, :create]
   def index
     @users = User.all
   end
