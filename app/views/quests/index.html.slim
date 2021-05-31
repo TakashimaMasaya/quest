@@ -10,12 +10,12 @@ h1 質問一覧
 
 = link_to '新規登録', new_quest_path, class: 'btn btn-primary'
 
-/ .btn.btn-primary.answered_btn
-/   | 未解決
-/ .btn.btn-primary.unanswered_btn
-/   | 解決済
-/ .btn.btn-primary.all_btn
-/   | 全て表示
+.btn.btn-primary.answered_btn
+  | 未解決
+.btn.btn-primary.unanswered_btn
+  | 解決済
+.btn.btn-primary.all_btn
+  | 全て表示
 
 .mb-3
   = paginate @quests
@@ -46,4 +46,6 @@ table.table.table-hover
           td
             = link_to '編集', edit_quest_path(quest), class: 'btn btn-primary mr-3'
             = button_to '削除', quest, method: :delete, data: { confirm: "質問を削除してよろしいですか？"}, class: 'btn btn-danger'
+
+= javascript_pack_tag 'home/index'
 

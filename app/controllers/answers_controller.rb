@@ -27,7 +27,6 @@ class AnswersController < ApplicationController
   def edit
     @quest = Quest.find(params[:quest_id])
     @answer = @quest.answers.find(params[:id])
-    # @answer = Answer.find(params[:id])
   end
 
   def update

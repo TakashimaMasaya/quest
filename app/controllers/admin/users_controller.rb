@@ -39,7 +39,8 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    #他のモデルに紐づいているから削除できない
+    @user.destroy!
     redirect_to admin_users_path, notice:"ユーザー「#{@user.name}」を削除しました。"
   end
 

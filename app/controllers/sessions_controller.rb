@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path, notice: 'ログインしました。'
     else
-      render :new
+      render :new, notice: "メールアドレス、もしくはパスワードが間違っています。"
     end
   end
 
