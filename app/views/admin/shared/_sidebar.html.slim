@@ -1,8 +1,11 @@
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    = link_to 'Admin', quests_path
-   
+
+      <h2 class="nav-item ml-2 mt-3">
+        = link_to 'Admin', quests_path, class:"nav-icon"
+      </h2>
+
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -10,19 +13,20 @@
       
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
-          <li class="nav-item">
-              <i class="nav-icon fas fa-user"></i>
-              = link_to 'ユーザー一覧', admin_users_path, class:"nav-icon fas fa-user"
-          </li>
-          <li class="nav-item">
-          <i class="nav-icon fas fa-question"></i>
-            = link_to '質問一覧', admin_questions_path, class:"nav-icon fas fa-user"
-          </li>
-        </ul>
-      </nav>
+      - if current_user
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            
+            <li class="nav-item">
+                <i class="nav-icon fas fa-user"></i>
+                = link_to 'ユーザー一覧', admin_users_path, class:"nav-icon fas fa-user"
+            </li>
+            <li class="nav-item">
+            <i class="nav-icon fas fa-question"></i>
+              = link_to '質問一覧', admin_questions_path, class:"nav-icon fas fa-user"
+            </li>
+          </ul>
+        </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
